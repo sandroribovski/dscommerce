@@ -46,7 +46,7 @@ public class ProductDTO {
         return price;
     }
 
-    public String getImgUrl() {
+   public String getImgUrl() {
         return imgUrl;
     }
 }
