@@ -4,6 +4,7 @@ package com.devjava.dscommerce.services;
 import com.devjava.dscommerce.dto.ProductDTO;
 import com.devjava.dscommerce.entities.Product;
 import com.devjava.dscommerce.repositories.ProductRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ProductService {
 
     @Autowired
@@ -43,10 +45,17 @@ public class ProductService {
 
     @Transactional()
     public ProductDTO update(Long id, ProductDTO dto) {
+        log.info("Realizando o update do contrato");
         Product entity = repository.getReferenceById(id);
         copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
         return new ProductDTO(entity);
+
+    }
+
+    @Transactional()
+    public void delete(Long id) {
+        repository.deleteById(id);
 
     }
 
